@@ -5,11 +5,23 @@ JiraAuth = {};
 var serviceName = 'jira';
 
 Meteor.loginWithJira = function(options, callback) {
+    // support a callback without options
+    if (! callback && typeof options === "function") {
+        callback = options;
+        options = null;
+    }
+
     var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
     JiraAuth.requestCredential(options, credentialRequestCompleteCallback);
 };
 
 JiraAuth.requestCredential = function(options, credentialRequestCompleteCallback) {
+    // support both (options, callback) and (callback).
+    if (!credentialRequestCompleteCallback && typeof options === 'function') {
+        credentialRequestCompleteCallback = options;
+        options = {};
+    }
+  
     var config = ServiceConfiguration.configurations.findOne({service: serviceName});
     if (!config) {
         if(credentialRequestCompleteCallback) {
