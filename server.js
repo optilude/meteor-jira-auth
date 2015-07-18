@@ -6,6 +6,12 @@ var JiraClient = Npm.require('jira-connector');
 var getAuthorizeURL = Meteor.wrapAsync(JiraClient.oauth_util.getAuthorizeURL, JiraClient.oauth_util),
     swapRequestTokenWithAccessToken = Meteor.wrapAsync(JiraClient.oauth_util.swapRequestTokenWithAccessToken, JiraClient.oauth_util);
 
+Accounts.addAutopublishFields({
+    forLoggedInUser: ['services.jira'],
+    forOtherUsers: [
+    ]
+});
+
 OAuth.registerService("jira", "1.0-jira", {}, function handleOauthRequest(oauthInfo, options) {
     var jiraClient = new JiraClient({
         host: oauthInfo.host,
@@ -19,8 +25,13 @@ OAuth.registerService("jira", "1.0-jira", {}, function handleOauthRequest(oauthI
 
     var myself = Meteor.wrapAsync(jiraClient.myself.getMyself, jiraClient.myself)({});
 
+    console.log(myself);
+
     var serviceData = {
-        id: myself.name,
+        id: myself.key,
+        username: myself.name,
+        name: myself.displayName,
+        email: myself.emailAddress,
         accessToken: OAuth.sealSecret(oauthInfo.accessToken),
         accessTokenSecret: OAuth.sealSecret(oauthInfo.accessTokenSecret)
     };
