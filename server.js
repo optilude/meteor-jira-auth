@@ -26,7 +26,7 @@ OAuth.registerService("jira", "1.0-jira", {}, function handleOauthRequest(oauthI
     var myself = Meteor.wrapAsync(jiraClient.myself.getMyself, jiraClient.myself)({});
 
     var serviceData = {
-        id: myself.key,
+        id: oauthInfo.host + "::" + myself.key,
         username: myself.name,
         name: myself.displayName,
         email: myself.emailAddress,

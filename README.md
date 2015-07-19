@@ -99,4 +99,14 @@ For example:
     });
 
 You can pass an options object to `loginWithJira()` to override things like
-`loginStyle` (set to `"popup"` or `"redirect"``) or the `jiraHost` name.
+`loginStyle` (set to `"popup"` or `"redirect") or the `jiraHost` name.
+
+# Changelog
+
+## 0.0.2
+
+* Store user id with the JIRA host as a prefix
+
+## 0.0.1
+
+* Initial release
