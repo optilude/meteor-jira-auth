@@ -30,6 +30,7 @@ OAuth.registerService("jira", "1.0-jira", {}, function handleOauthRequest(oauthI
         username: myself.name,
         name: myself.displayName,
         email: myself.emailAddress,
+        host: oauthInfo.host,
         accessToken: OAuth.sealSecret(oauthInfo.accessToken),
         accessTokenSecret: OAuth.sealSecret(oauthInfo.accessTokenSecret)
     };

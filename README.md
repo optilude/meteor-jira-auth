@@ -101,7 +101,42 @@ For example:
 You can pass an options object to `loginWithJira()` to override things like
 `loginStyle` (set to `"popup"` or `"redirect") or the `jiraHost` name.
 
+### Accessing JIRA configuration to use the JIRA API
+
+When a user is authenticated against JIRA, you can access the necessary OAuth
+information to make queries against JIRA.
+
+Here is an example using `jira-connector` (from NPM) in an application in
+server-side code.
+
+    function getJiraClient() {
+        var user = Meteor.user();
+        if(!user || !user.services.jira) {
+            throw new Meteor.Error("not-authenticated-with-jira", "Current user is not authenticated against a JIRA instance");
+        }
+
+        var config = ServiceConfiguration.configurations.findOne({service: "jira"});
+        if(!config) {
+            throw new Meteor.Error("jira-authentication-not-configured", "JIRA authentication is not configured");
+        }
+
+        return new JiraClient({
+            host: user.services.jira.host,
+            oauth: {
+                consumer_key: config.consumerKey,
+                private_key: Assets.getText("keys/myapp.pem"),
+                token: user.services.jira.accessToken,
+                token_secret: user.services.jira.accessTokenSecret
+            }
+        });
+
+    };
+
 # Changelog
+
+## 0.0.3
+
+* Store host in user services data
 
 ## 0.0.2
 
