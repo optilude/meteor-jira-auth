@@ -134,6 +134,10 @@ server-side code.
 
 # Changelog
 
+## 0.0.4
+
+* Better error handling in case of invalid JIRA authentication parameters
+
 ## 0.0.3
 
 * Store host in user services data
