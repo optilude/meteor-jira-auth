@@ -3,7 +3,7 @@
 
 Package.describe({
     name: 'optilude:jira-auth',
-    version: '0.0.3',
+    version: '0.0.4',
     summary: 'Authenticate to a remote JIRA instance',
     git: 'https://github.com/optilude/meteor-jira-auth',
     documentation: 'README.md'

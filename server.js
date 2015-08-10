@@ -65,18 +65,14 @@ OAuth._requestHandlers['1.0-jira'] = function(service, query, res) {
             android: (query.android === "true")
         });
 
-        try {
-            oauthResponse = getAuthorizeURL({
-                host: query.jiraHost || config.jiraHost,
-                oauth: {
-                    consumer_key: config.consumerKey,
-                    private_key: config.privateKey,
-                    callback_url: callbackUrl
-                }
-            });
-        } catch(err) {
-            throw err.data;
-        }
+        oauthResponse = getAuthorizeURL({
+            host: query.jiraHost || config.jiraHost,
+            oauth: {
+                consumer_key: config.consumerKey,
+                private_key: config.privateKey,
+                callback_url: callbackUrl
+            }
+        });
 
         // Keep track of request token so we can verify it on the next step
         OAuth._storeRequestToken(
