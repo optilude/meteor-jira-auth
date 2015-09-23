@@ -134,6 +134,10 @@ server-side code.
 
 # Changelog
 
+## 0.0.5
+
+* Compatible with Meteor 1.2
+
 ## 0.0.4
 
 * Better error handling in case of invalid JIRA authentication parameters

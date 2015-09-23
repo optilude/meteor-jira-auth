@@ -3,7 +3,7 @@
 
 Package.describe({
     name: 'optilude:jira-auth',
-    version: '0.0.4',
+    version: '0.0.5',
     summary: 'Authenticate to a remote JIRA instance',
     git: 'https://github.com/optilude/meteor-jira-auth',
     documentation: 'README.md'
@@ -14,7 +14,7 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-    api.versionsFrom('1.1.0.2');
+    api.versionsFrom('1.2.0.1');
 
     api.use([
         'oauth',
@@ -22,7 +22,8 @@ Package.onUse(function(api) {
         'underscore',
         'service-configuration',
         'accounts-base',
-        'accounts-oauth'
+        'accounts-oauth',
+        'random'
     ]);
 
     api.imply([

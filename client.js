@@ -2,7 +2,9 @@
 "use strict";
 
 JiraAuth = {};
+
 var serviceName = 'jira';
+Accounts.oauth.registerService(serviceName);
 
 Meteor.loginWithJira = function(options, callback) {
     // support a callback without options
@@ -21,7 +23,7 @@ JiraAuth.requestCredential = function(options, credentialRequestCompleteCallback
         credentialRequestCompleteCallback = options;
         options = {};
     }
-  
+
     var config = ServiceConfiguration.configurations.findOne({service: serviceName});
     if (!config) {
         if(credentialRequestCompleteCallback) {

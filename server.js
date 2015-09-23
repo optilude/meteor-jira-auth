@@ -12,6 +12,7 @@ Accounts.addAutopublishFields({
     ]
 });
 
+Accounts.oauth.registerService("jira");
 OAuth.registerService("jira", "1.0-jira", {}, function handleOauthRequest(oauthInfo, options) {
     var jiraClient = new JiraClient({
         host: oauthInfo.host,
